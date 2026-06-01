@@ -1,0 +1,76 @@
+/* Pretendard — 한국어 최우선 폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, system-ui, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+/* 한국어 줄바꿈 — 어절 단위로만 끊기게 (디자인 README 명시: "반드시 유지") */
+.phone, .screen {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* 모노 폰트 — 숫자/바코드/날짜 표시용 (tnum) */
+.mono {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* 가로 구분선 */
+.divider-h {
+  height: 1px;
+  background: var(--hairline);
+  width: 100%;
+}
+
+/* ─── 스크롤바 — 라이트/다크 자동 전환 ───────────────────
+   트랙은 화면 배경과 동일색이라 "스크롤바 칸"이 보이지 않음.
+   엄지(움직이는 부분)는 배경과 반대 톤으로 충분한 대비.
+   border 트릭으로 엄지에 살짝 패딩을 줘서 좁고 둥글게 보이게 함.
+   ─────────────────────────────────────────────────── */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+/* WebKit (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;        /* 부모 배경 그대로 노출 → bg/surface와 자연스럽게 일치 */
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 8px;
+  border: 2px solid transparent;  /* 좌우에 빈틈 → 엄지가 가늘고 둥글게 보임 */
+  background-clip: padding-box;   /* 보더 영역엔 색이 안 채워지게 */
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}

@@ -1,0 +1,106 @@
+/* 검색 히스토리 — 홈 화면 추천 칩 위 섹션.
+   .suggestions와 동일한 모핑 트랜지션(home에서만 보임). */
+.history {
+  margin-top: 14px;
+  overflow: hidden;
+  transition: max-height 520ms cubic-bezier(0.32, 0.72, 0, 1),
+              opacity 240ms,
+              margin 520ms;
+  max-height: 200px;  /* 헤더 + 칩 5개 + 여백 충분히 */
+  opacity: 1;
+}
+.mode-results .history,
+.mode-detail .history {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+}
+
+.history__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 4px;
+  margin-bottom: 8px;
+}
+.history__title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.history__clear {
+  all: unset;
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: -0.005em;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 160ms, background 160ms;
+}
+.history__clear:hover {
+  color: var(--text-2);
+  background: var(--surface-2);
+}
+
+.history__chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* 본체 버튼 + X 버튼을 하나의 칩으로 묶음 — 둘이 같은 배경/보더 공유 */
+.history__chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  transition: background 160ms;
+}
+.history__chip:hover {
+  background: var(--surface-2);
+}
+
+.history__chip-main {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 6px 7px 12px;
+  font-size: 12px;
+  color: var(--text-2);
+  letter-spacing: -0.005em;
+  font-weight: 500;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.history__chip-main:active {
+  transform: scale(0.97);
+}
+
+.history__chip-x {
+  all: unset;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  border-radius: 50%;
+  transition: background 160ms, transform 140ms;
+}
+.history__chip-x:hover {
+  background: var(--border);
+}
+.history__chip-x:active {
+  transform: scale(0.85);
+}

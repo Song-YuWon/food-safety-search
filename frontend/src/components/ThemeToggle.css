@@ -1,0 +1,46 @@
+/* 우상단 고정 토글 — phone 컨테이너의 absolute child.
+   brand-block(z:5)보다 위, detail-sheet(z:30) 아래 → 상세에서는 숨겨짐.
+   상세 화면은 자체 ← 버튼이 있어 토글이 가려도 UX 영향 없음. */
+.theme-toggle {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  z-index: 10;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-2);
+  box-shadow: var(--shadow-soft);
+  transition: background 160ms ease, transform 140ms ease, border-color 160ms ease;
+  padding: 0;
+}
+.theme-toggle:hover {
+  background: var(--surface-2);
+}
+.theme-toggle:active {
+  transform: scale(0.93);
+}
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--border-strong);
+  outline-offset: 2px;
+}
+
+/* 인라인 variant — 상세 navbar 안에 들어가는 작은 버튼.
+   navbar의 ← 뒤로 버튼(40×40)과 동일 크기, 보더/그림자 제거해 자연스럽게 녹아듦. */
+.theme-toggle--inline {
+  position: static;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.theme-toggle--inline:hover {
+  background: var(--surface-2);
+}

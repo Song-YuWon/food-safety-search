@@ -1,0 +1,19 @@
+{
+  "name": "food-safety-backend",
+  "version": "1.0.0",
+  "description": "안심식품 검색기 백엔드 — 식약처 데이터 동기화 + 검색 API",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "fast-xml-parser": "^4.3.6",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^2.7.0"
+  }
+}

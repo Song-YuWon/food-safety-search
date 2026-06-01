@@ -1,0 +1,50 @@
+/* 풀스크린 이미지 뷰어 — 부모 .detail-sheet 안 absolute.
+   라이트/다크와 무관하게 항상 검정 배경 (이미지 집중). */
+
+.image-viewer {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 280ms ease;
+  cursor: zoom-out;       /* 배경 클릭으로 닫힘을 시각적으로 암시 */
+}
+.image-viewer.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.image-viewer__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  cursor: default;        /* 이미지 위에서는 zoom-out 커서 안 보이게 */
+  background: #fff;       /* 투명 PNG 대비 */
+}
+
+.image-viewer__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background 160ms ease, transform 140ms ease;
+}
+.image-viewer__close:hover  { background: rgba(255, 255, 255, 0.25); }
+.image-viewer__close:active { transform: scale(0.92); }

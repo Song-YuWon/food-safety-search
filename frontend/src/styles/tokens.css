@@ -1,0 +1,64 @@
+/* ───────────────────────────────────────────
+   디자인 토큰 — 핸드오프 README "Design Tokens" 그대로
+   라이트/다크 두 테마. data-theme 속성으로 스위치.
+   ─────────────────────────────────────────── */
+
+:root,
+[data-theme="light"] {
+  --bg:            #EEF1F4;
+  --surface:       #FFFFFF;
+  --surface-2:     #F4F6F9;
+  --border:        #DDE3EA;
+  --border-strong: #C7CFD9;
+  --hairline:      #E6EAEF;
+
+  --text-1: #0F1820;
+  --text-2: #475160;
+  --text-3: #7A8493;
+  --text-4: #A1AAB6;
+
+  --disclaimer: #B85450;  /* 면책 안내 — 옅은 빨강 */
+
+  --danger:  #D62828;      /* 1·2등급 */
+  --warning: #B8800A;      /* 3등급 (deep amber, 흰 글자 대비) */
+  --safe:    #1A8F4A;      /* 안전 / 라이브 도트 */
+
+  --shadow-soft: 0 1px 2px rgba(15,24,32,0.04),
+                 0 8px 24px rgba(15,24,32,0.04);
+
+  /* 결과 배너 전용 그림자 */
+  --shadow-danger:  0 8px 20px rgba(214,40,40,0.18);
+  --shadow-warning: 0 8px 20px rgba(184,128,10,0.20);
+  --shadow-safe:    0 8px 20px rgba(26,143,74,0.20);
+
+  /* 스크롤바 — 트랙은 배경과 동일, 엄지는 배경의 반대 톤 */
+  --scrollbar-thumb:       #C7CFD9;  /* border-strong과 동일 (라이트에선 어두운 회색) */
+  --scrollbar-thumb-hover: #A1AAB6;  /* text-4 */
+}
+
+[data-theme="dark"] {
+  --bg:            #0B1018;
+  --surface:       #141A23;
+  --surface-2:     #1A2230;
+  --border:        #232C39;
+  --border-strong: #2F3A4A;
+  --hairline:      #1E2632;
+
+  --text-1: #E8ECF2;
+  --text-2: #A6B0BF;
+  --text-3: #7A8493;
+  --text-4: #525C6B;
+
+  --disclaimer: #FF9B95;
+
+  --danger:  #FF6B6B;
+  --warning: #C9911A;
+  --safe:    #1F7A45;
+
+  --shadow-soft: 0 1px 2px rgba(0,0,0,0.4),
+                 0 8px 24px rgba(0,0,0,0.35);
+
+  /* 다크에서는 배경이 어둡고 엄지가 살짝 밝은 회색 — 반전 */
+  --scrollbar-thumb:       #2F3A4A;  /* border-strong (다크) */
+  --scrollbar-thumb-hover: #525C6B;  /* text-4 (다크) */
+}
