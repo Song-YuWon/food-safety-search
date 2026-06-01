@@ -1,0 +1,41 @@
+# Render Blueprint — 이 파일이 있으면 Render에서 repo를 import할 때
+# "Apply Blueprint" 한 번으로 모든 설정이 자동 구성된다.
+#
+# 사용법:
+#   1. Render 대시보드 → New + → Blueprint
+#   2. 이 repo 선택 → Apply
+#   3. 환경변수(sync: false인 것들)는 대시보드에서 직접 입력
+#      - FOODSAFETY_API_KEY      (필수)
+#      - DISCORD_WEBHOOK_URL     (선택, 비워두면 알림 건너뜀)
+#      - ALLOWED_ORIGINS         (Vercel URL 정해진 후 입력)
+#
+# 참고: Free tier는 15분 idle 후 sleep → 첫 요청 30초 지연.
+#       사용자 트래픽이 많아지면 Starter ($7/월)로 업그레이드해 sleep 제거.
+
+services:
+  - type: web
+    name: food-safety-search-api
+    runtime: node
+    region: singapore     # 한국에서 가장 가까운 무료 리전
+    plan: free
+    rootDir: backend
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health   # 컨테이너 가동 확인
+    autoDeploy: true               # main 브랜치 push 시 자동 재배포
+
+    envVars:
+      # 필수 — 식약처 API 키. 보안상 대시보드에서 직접 입력.
+      - key: FOODSAFETY_API_KEY
+        sync: false
+      # 선택 — Discord 웹훅 (동기화 실패 알림)
+      - key: DISCORD_WEBHOOK_URL
+        sync: false
+      # 프론트 URL이 정해진 후 추가 (예: https://food-safety-search.vercel.app)
+      - key: ALLOWED_ORIGINS
+        sync: false
+      # 고정값 — render.yaml에서 직접 지정 가능
+      - key: SYNC_CRON
+        value: "0 4 * * *"
+      - key: NODE_VERSION
+        value: "20"
