@@ -16,6 +16,10 @@ module.exports = {
   // Discord 웹훅 (기획서 4-3절)
   DISCORD_WEBHOOK_URL: process.env.DISCORD_WEBHOOK_URL || '',
 
+  // CORS 허용 origin — 콤마 구분 문자열, 비어있으면 모든 origin 허용 (dev/초기 배포용).
+  // production에서는 프론트 URL만 명시: "https://food-safety-search.vercel.app"
+  ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS || '',
+
   // 동기화 스케줄 — cron 형식 (기획서: 매일 새벽 04:00)
   SYNC_CRON: process.env.SYNC_CRON || '0 4 * * *',
 

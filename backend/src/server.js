@@ -12,11 +12,21 @@ const { writeLog } = require('./services/notify');
 const searchRouter = require('./routes/search');
 
 const app = express();
-app.use(cors());
+
+// CORS — ALLOWED_ORIGINS가 설정되어 있으면 그 목록만 허용, 비어있으면 모두 허용.
+// 프로덕션에서는 반드시 .env의 ALLOWED_ORIGINS에 프론트 URL을 명시할 것.
+const allowedOrigins = config.ALLOWED_ORIGINS
+  ? config.ALLOWED_ORIGINS.split(',').map(s => s.trim()).filter(Boolean)
+  : true;
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
 // ─── 라우트 ───────────────────────────────────────────────
 app.use('/api/search', searchRouter);
+
+// Render 등 PaaS의 health check — 컨테이너가 살아있는지 확인하는 가벼운 endpoint.
+// 데이터가 아직 안 받아져도 200을 내보내야 startup probe가 성공한다.
+app.get('/api/health', (_req, res) => res.json({ ok: true }));
 
 // 마지막 업데이트 시각과 데이터 건수 — 프론트 홈화면 표시용
 // recent: 가장 최근에 등록된 회수 제품 3개 — 추천 검색 칩 생성에 사용

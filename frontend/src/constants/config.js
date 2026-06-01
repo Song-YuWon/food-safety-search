@@ -1,9 +1,15 @@
 // 프론트엔드 설정값 — 변경하기 쉬운 매직 값들을 한 곳에
 
-// API — 개발 환경에서는 Vite 프록시가 /api/* 를 백엔드로 전달
+// API base URL — 빌드 시점에 VITE_API_BASE 환경변수로 주입.
+//   · dev:        빈 문자열 → Vite 프록시(/api/* → localhost:3001) 사용
+//   · production: 백엔드 절대 URL (예: "https://food-safety-search-api.onrender.com")
+// 끝의 슬래시는 제거해 이중 슬래시 방지.
+const RAW_BASE = import.meta.env.VITE_API_BASE || '';
+const BASE = RAW_BASE.replace(/\/$/, '');
+
 export const API = {
-  SEARCH:  '/api/search',
-  STATUS:  '/api/status',
+  SEARCH: `${BASE}/api/search`,
+  STATUS: `${BASE}/api/status`,
 };
 
 // 로딩 스켈레톤 표시 시간 — README "표시 시간: 700ms"

@@ -1,0 +1,50 @@
+name: Tests
+
+# main 브랜치에 push되거나 PR이 열릴 때 자동 실행.
+# 백엔드/프론트엔드 테스트가 모두 통과해야 녹색 체크가 표시되어
+# 안전하게 배포 가능 상태인지 한눈에 확인.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Backend (node:test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - name: Run backend tests
+        run: npm test
+
+  frontend:
+    name: Frontend (vitest + build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - name: Run frontend tests
+        run: npm test
+      # 빌드까지 한 번 더 확인 — 배포 실패를 미리 잡음
+      - name: Build (sanity check)
+        run: npm run build
